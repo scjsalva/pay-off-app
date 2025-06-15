@@ -508,7 +508,16 @@ const calculateMonthlyNet = (profile) => {
 const formatNumber = (num) => {
   // Round to 2 decimal places
   const rounded = Math.round(num * 100) / 100
-  // Format with leading zeros and 2 decimal places
+  
+  // If number is >= 1000, format without decimals
+  if (rounded >= 1000) {
+    return rounded.toLocaleString('en-US', {
+      minimumIntegerDigits: 2,
+      maximumFractionDigits: 0
+    })
+  }
+  
+  // Otherwise format with 2 decimal places
   return rounded.toLocaleString('en-US', {
     minimumIntegerDigits: 2,
     minimumFractionDigits: 2,
